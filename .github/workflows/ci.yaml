@@ -29,15 +29,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_NOTIFY_USER_LIST: '@harshitrajsinha'
 
-      # - name: Setup Python v3.12
-      #   uses: actions/setup-python@v6
-      #   with:
-      #     python-version: '3.12'
-
-      - name: Type checker by Pyre
-        uses: facebook/pyre-action@v0.0.2
+      - name: Setup Python v3.12
+        uses: actions/setup-python@v6
         with:
-            repo-directory: './'
+          python-version: '3.12'
+
+      - name: Type check
+        run: pyright
       
       - name: Linting via Ruff
         uses: astral-sh/ruff-action@v4.0.0
+
