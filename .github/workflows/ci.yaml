@@ -6,6 +6,7 @@ on:
       - main
       - dev
     paths:
+      - 'github/*'
       - 'main.py'
 
 permissions:
