@@ -14,29 +14,29 @@ permissions:
 jobs:
 
   security-scan:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v6.0.2
-          with:
-            fetch-depth: 0
-        
-        - name: Secret scan
-          uses: gitleaks/gitleaks-action@v3.0.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITLEAKS_NOTIFY_USER_LIST: '@harshitrajsinha'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+      
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_NOTIFY_USER_LIST: '@harshitrajsinha'
 
-        # - name: Setup Python v3.12
-        #   uses: actions/setup-python@v6
-        #   with:
-        #     python-version: '3.12'
+      # - name: Setup Python v3.12
+      #   uses: actions/setup-python@v6
+      #   with:
+      #     python-version: '3.12'
 
-        - name: Type checker by Pyre
-          uses: facebook/pyre-action@v0.0.2
-          with:
-              repo-directory: './'
-        
-        - name: Linting via Ruff
-          uses: astral-sh/ruff-action@v4.0.0
+      - name: Type checker by Pyre
+        uses: facebook/pyre-action@v0.0.2
+        with:
+            repo-directory: './'
+      
+      - name: Linting via Ruff
+        uses: astral-sh/ruff-action@v4.0.0
