@@ -1,0 +1,42 @@
+name: CI pipeline to run basic sanity testing and create and push docker image
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'main.py'
+  
+  permissions:
+    contents: read
+  
+  jobs:
+
+    security-scan:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v6.0.2
+          with:
+            fetch-depth: 0
+        
+        - name: Secret scan
+          uses: gitleaks/gitleaks-action@v3.0.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+        # - name: Setup Python v3.12
+        #   uses: actions/setup-python@v6
+        #   with:
+        #     python-version: '3.12'
+
+        - name: Type checker by Pyre
+          uses: facebook/pyre-action@v0.0.2
+          with:
+              repo-directory: './'
+        
+        - name: Linting via Ruff
+          uses: astral-sh/ruff-action@v4.0.0
