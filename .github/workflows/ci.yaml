@@ -5,12 +5,11 @@ on:
     branches:
       - main
       - dev
-    # paths:
-    #   - '.github/workflows/**'
-    #   - 'main.py'
-    paths-exclude:
-      - 'README.md'
-      - 'docs/**'
+    paths:
+      - 'main.py'
+    # paths-exclude:
+    #   - 'README.md'
+    #   - 'docs/**'
 
 permissions:
   contents: read
