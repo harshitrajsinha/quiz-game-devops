@@ -12,7 +12,7 @@ def whether_to_continue():
     if ask.strip().lower() != "yes":
         sys.exit()
 
-def main() -> None:
+def main():
     print("Welcome to my computer quiz!")
 
     playing = input("Do you want to play? ")

@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12.13-alpine
 
 WORKDIR /app
 
@@ -8,8 +8,12 @@ WORKDIR /app
 COPY main.py .
 
 # Create a non-root user to avoid running as root
-RUN useradd -m --shell /bin/bash quizuser
-USER quizuser
+RUN addgroup -S appgroup && \
+    adduser -S appuser -G appgroup
+
+RUN chown -R appuser:appgroup /app
+
+USER appuser
 
 # Run the script
 CMD ["python", "main.py"]
