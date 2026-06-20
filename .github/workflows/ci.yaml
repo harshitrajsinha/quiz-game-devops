@@ -35,7 +35,9 @@ jobs:
           python-version: '3.12'
 
       - name: Type check
-        run: pyright
+        run: |
+          pip install pyright
+          pyright
       
       - name: Linting via Ruff
         uses: astral-sh/ruff-action@v4.0.0
